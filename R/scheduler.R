@@ -72,11 +72,11 @@ NaiveScheduler <- R6Class("NaiveScheduler",
     executeTasks = function() {
       while (TRUE) {
         tasks <- sort(ls(private$scheduledTasks))
-        logger(tasks)
         if (length(tasks) == 0) break
         task <- private$scheduledTasks[[tasks[[1]]]]
         force(task)
         rm(list = tasks[[1]], envir = private$scheduledTasks)
+        logger(tasks)
         self$protect({
           task()
         })
