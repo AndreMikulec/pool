@@ -5,9 +5,6 @@ context("Pool scheduling")
 describe("pool scheduler", {
 
   it("schedules things in the right order", {
-    logger("-----------------------------------------------")
-    logger("----------------- TESTING ---------------------")
-    logger("-----------------------------------------------")
     results <- integer()
 
     # naiveScheduler$protect is necessary here in order
