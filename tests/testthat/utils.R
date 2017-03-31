@@ -74,6 +74,3 @@ checkCounts <- function(pool, free, taken) {
 #   }
 # }
 
-logger <- function(obj) {
-  cat(format(obj), "\n", file = stderr())
-}
