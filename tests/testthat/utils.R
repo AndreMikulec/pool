@@ -73,3 +73,7 @@ checkCounts <- function(pool, free, taken) {
 #     skip("Did not test integration with shiny package")
 #   }
 # }
+
+logger <- function(obj) {
+  cat(format(obj), "\n", file = stderr())
+}
