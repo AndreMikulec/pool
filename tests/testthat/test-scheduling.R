@@ -11,10 +11,10 @@ describe("pool scheduler", {
     # to make sure all the scheduled tasks are executed
     # at the end of the test, not immediately.
     naiveScheduler$protect({
-      scheduleTask(1000, function() {
+      scheduleTask(100000, function() {
         results <<- c(results, 3L)
       })
-      scheduleTask(100, function() {
+      scheduleTask(10000, function() {
         results <<- c(results, 2L)
       })
       scheduleTask(10, function() {
@@ -22,6 +22,7 @@ describe("pool scheduler", {
       })
     })
     expect_identical(results, 1:3)
+    cat("===== Results: ", results, "=====\n", file = stderr())
   })
 
   pool <- poolCreate(MockPooledObj$new,

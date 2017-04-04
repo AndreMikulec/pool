@@ -64,6 +64,7 @@ NaiveScheduler <- R6Class("NaiveScheduler",
     scheduledTasks = NULL,
     seq = NULL,
     refCount = NULL,
+    n = 1,
 
     ## the actual mechanism of executing the scheduled tasks:
     ## look into the scheduledTasks environment, sort it, and
@@ -74,13 +75,22 @@ NaiveScheduler <- R6Class("NaiveScheduler",
         tasks <- sort(ls(private$scheduledTasks))
         if (length(tasks) == 0) break
         t <- tasks[[1]]
+
+        cat(tasks, "\n", file = stderr())
+        cat(ls(private$scheduledTasks), "----\n", file = stderr())
+        # cat(t, "****\n", file = stderr())
+
+        # if (grepl("-16$", t)) {
+        #   dump.frames(paste0("dump", private$n), TRUE)
+        #   private$n <- private$n + 1
+        # }
+
         task <- private$scheduledTasks[[t]]
-        cat(t, file = stderr())
-        #force(task)
         rm(list = t, envir = private$scheduledTasks)
-        self$protect({
+
+        # self$protect({
           task()
-        })
+        # })
       }
     })
 )
