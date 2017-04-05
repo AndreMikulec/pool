@@ -31,10 +31,16 @@ NaiveScheduler <- R6Class("NaiveScheduler",
       ## after tasks set for earlier (when `sort(ls(scheduledTasks))`
       ## is run)
       private$seq <- private$seq + 1
-      timestamp <- paste0(
-        format(Sys.time() + millis/1000, "%Y%m%d-%H%M%OS6-"),
-        private$seq
-      )
+
+      # NOTE: These two lines shouldn't have any effect, but removing makes
+      # the error go away. That doesn't mean that they cause the error,
+      # though.
+      time0 <- structure(1491435458.17886, class = c("POSIXct", "POSIXt")) + millis/1000
+      format(time0, "%Y%m%d-%H%M%OS6-")
+
+      # Replace the timestamp from above with something deterministic
+      timestamp <- sprintf("%06d-%03d", millis, private$seq)
+
       ## add task to the environment of scheduled tasks
       private$scheduledTasks[[timestamp]] <- callback
 
