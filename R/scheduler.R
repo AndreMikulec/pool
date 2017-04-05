@@ -76,14 +76,10 @@ NaiveScheduler <- R6Class("NaiveScheduler",
         if (length(tasks) == 0) break
         t <- tasks[[1]]
 
-        cat(tasks, "\n", file = stderr())
-        cat(ls(private$scheduledTasks), "----\n", file = stderr())
-        # cat(t, "****\n", file = stderr())
-
-        # if (grepl("-16$", t)) {
-        #   dump.frames(paste0("dump", private$n), TRUE)
-        #   private$n <- private$n + 1
-        # }
+        s <- stderr()
+        cat(tasks, "--1--\n", file = s)
+        cat(ls(private$scheduledTasks), "--2--\n", file = s)
+        cat(t, "--3--\n", file = s)
 
         task <- private$scheduledTasks[[t]]
         rm(list = t, envir = private$scheduledTasks)
